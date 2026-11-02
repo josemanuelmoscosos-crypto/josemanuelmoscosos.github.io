@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rutas | La Parada Blanca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <header class="barra">
+    <a class="marca" href="index.html"><b>LPB</b> La Parada Blanca</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="rutas.html" aria-current="page">Rutas</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="cabecera-rutas">
+      <h1>Rutas de los micros</h1>
+      <p>Busca por número de línea, nombre o barrio.</p>
+      <div class="buscador">
+        <label for="buscar">Buscar una línea</label>
+        <input id="buscar" type="search" placeholder="BUSCAR" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="lista">
+      <p class="conteo" id="conteo" aria-live="polite"></p>
+      <div id="resultados"></div>
+      <p class="vacio" id="vacio" hidden>No encontramos esa línea. Prueba con el número o con el nombre de un barrio.</p>
+      <a class="boton" href="index.html" style="margin-top:20px">Volver al inicio</a>
+    </section>
+  </main>
+
+  <div class="foto">
+        <img src="c:\Users\HP\OneDrive\Documentos\documentos Tania\la parada blanca.jpeg" alt="Vista de la ciudad de Sucre"
+             onerror="this.style.display='none'; document.getElementById('aviso').hidden=false;">
+      </div>
+
+  <footer class="pie">La Parada Blanca. Sucre, Bolivia.</footer>
+
+  <script>
+    /* ==========================================================
+       AQUÍ PONES TUS LÍNEAS. Copia un bloque { ... }, pégalo
+       después de una coma y cambia los datos:
+         numero  : el número de la línea
+         nombre  : cómo quieres llamarla
+         paradas : lista de paradas en el orden del recorrido
+       Las líneas de abajo son ejemplos: reemplázalas por las reales.
+       ========================================================== */
+   const LINEAS = [
+       {
+        numero: "01",
+        nombre: "Línea 01",
+        paradas: ["Mercado San antonio", "J. prudencio", "Mercado Campesino", "Plazuela San juanillo", "Puente Tintamayu", "Av. Juana azurduy", "Parada Ravelo", "Av. 6 de agosto", "Ex aereopuerto", "Lajastambo", "Cuartel", "Barrio villa Marlecita"]
+      },
+      {
+        numero: "1",
+        nombre: "Línea 1",
+        paradas: ["Hospital Lajastambo", "Av. Juana Azurduy", "Parada Rabelo", "Av. del Maestro", "Av. Hernando Siles", "Aniceto Arce", "San Alberto", "El Guereo", "Av. del Ejercito", "Azari"]
+      },
+      {
+        numero: "2",
+        nombre: "Línea 2",
+        paradas: ["Cora Cora", "Azari", "Av. del Ejercito", "El Guereo", "Inca Prudencio", "Mercado Campesino", "Nataniel Aguirre", "Reloj", "Aniceto Arce", "San Alberto", "Bolivar", "Dalence","Bustillos", "Barrio America"]
+      },
+      {
+        numero: "3",
+        nombre: "Línea 3",
+        paradas: ["Barrio Cessa", "Villa Margarita", "Marcelo Quiroga", "Inca Prudencio", "San Alberto", "Dalence", "Olañeta", "Av. 6 de agosto", "Ex aereopuerto", "Barrio Belen"]
+      },
+       {
+        numero: "4",
+        nombre: "Línea 4",
+        paradas: ["El Tejar", "Marcelo Quiroga", "Inca Prudencio", "Mercado Campesino", "Estadium patria", "Av. Hernando siles", "Cementerio"]
+      },
+      {
+        numero: "5",
+        nombre: "Línea 5",
+        paradas: ["Barrio 20 de junio", "Molle Molle", "Villa armonia", "Hospital Universitario", "Plazuela San juanillo", "Av. German Bush", "Av. del Maestro", "Av. Hernando Siles", "Bolivar", "Azurduy", "La Paz", "Villa Charcas"]
+      },
+      {
+        numero: "6",
+        nombre: "Línea 6",
+        paradas: ["Barrio Cessa", "Marcelo Quiroga", "Mercado Morro", "Plazuela San juanillo", "Puente Tinamayu", "Parada Ravelo", "San alberto", "Facultdad de economia", "Poconas","Lechuguillas" ]
+      },
+      {
+        numero: "7",
+        nombre: "Línea 7",
+        paradas: ["Barrio Japon", "Mercado San Antonio", "Parada tarabuco", "El Guereo", "Calvo", "Plaza 25 de mayo", "España", "Camargo", "Av. Hernando siles", "Av. del Maestro", "Plazuela San juanillo", "Mercado Avasto", "Mercado Morro", "Av. Marcelo Quiroga","Barrio Cessa"]
+      },
+      {
+        numero: "8",
+        nombre: "Línea 8",
+        paradas: ["Barrio Japon", "Mercado San Antonio", "Parada tarabuco", "Av. Emilio Mendizabal", "Inca Prudencio", "Guillermo Loaiza", "Mercado Campesino", "Plazuela San juanillo", "Puente tintamayu","Av Circunvalacion","Aranjuez","Apachetas"]
+      },
+      {
+        numero: "10",
+        nombre: "Línea 10",
+        paradas: ["Alto sucre", "Av. Juana Azurduy", "Ex aereopuerto", "Av. 6 agosto", "Quirpinchaca", "Ex estacion", "Mercado Central", "San alberto", "El Guereo","Av. Jaime Mendoza","Plazuela Coperativa","Plazuela San Juanillo","Las Canelas","Julio Villa","Villa armonia","Roberedo"]
+      },
+      {
+        numero: "11",
+        nombre: "Línea 11",
+        paradas: ["Alto sucre", "Barrio los Pinos", "Av. Juana Azurduy", "Parada Ravelo", "Puente Tintamayu", "Mercado Campesino", "Ostria reyes", "Inca Prudencio", "Marcelo Quiroga", "Copacasa", "Barrio San Rafael"]
+      },
+      {
+        numero: "12",
+        nombre: "Línea 12",
+        paradas: ["Barrio Canada", "Av. Julio Villa", "Pomabamba", "Demtitrio Canelas", "Av. German Mendoza", "Av. del Maestro", "Av. Hernando Siles", "Aniceto Arce", "Av. Bartolome","Miguel de Rodas","Max Toledo"]
+      },
+       {
+        numero: "14",
+        nombre: "Línea 14",
+        paradas: ["Barrio Libertadores", "Barbados", "Honduras", "Cumana", "Rene barrientos", "Av. German Mendoza", "23 de marzo","Av. Jaime Mendoza", "Calvo", "España", "Viecnte Camargo", "Av. Hernando Siles", "Loa", "Olañeta","Rene Moreno","Mauro Nuñes", "Humberto Quezada","Nataniel Aguirre","Mercado Campesino"]
+      },
+      {
+        numero: "25",
+        nombre: "Línea 25",
+        paradas: ["Cuchutambo", "Barrio 25 de mayo", "Av. Juana Azurduy", "Plazuela San Juanillo", "Mercado Morro", "Rotonda Rotari", "Av. Marcelo Quiroga","Av. de las Americas", "El Guereo","Av. del Ejercito","Azari", "Barrio Igla"]
+      },         
+      {
+        numero: "33",
+        nombre: "Línea 33",
+        paradas: ["BArrio Alegria", "Surtidor Trebol", "Rotonda Fancesa", "Av. Marcelo Quiroga", "Av. Jaime Mendoza", "Aniceto Arce", "Av. Hernando Siles","loa", "Barrio Prosperina","Mercado Copacabana","Casa y Pesca"]
+      },
+      {
+        numero: "50",
+        nombre: "Línea 50",
+        paradas: ["Los Tarcos", "San Luis", "Tujsupaya", "Av. Juana Azurduy", "Distribuidor tintamayu", "Marzana", "Av. Jaime Mendoza","Av. Hernando Siles", "Ravelo", "San alberto", "El Guereo", "Av. del Ejercito", "El Abra", "Rumi rumi"]
+      },
+      {
+        numero: "77",
+        nombre: "Línea 77",
+        paradas: ["Alto sucre", "Tarcos", "San Luis", "Tujsupaya", "Av. Juana Azurduy", "Distribuidor Tintamayu", "Plazuela San Juanillo","Av. Jaime Mendoza", "Hospital San Pedro ","El Guereo", "Av. del Ejercito", "Rumi rumi","Barrio Bolivia"]
+      },
+      {
+        numero: "80",
+        nombre: "Línea 80",
+        paradas: ["Barrio 25 de mayo", "Ex aeropuerto", "Av. 6 de agosto", "Quirpinchaca", "Ex estacion", "Av. Hernando Siles", "San Alverto","FAcultad de economia", "Mercado Poconas","Parada Tarabuco"  ,"Barrio Japon"]
+      },
+      {
+        numero: "125",
+        nombre: "Línea 125",
+        paradas: ["Barrio Belen", "Ex aeropuerto", "Av. 6 de agosto", "Av. Juana Azurduy", "Puente TinTamayu", "Plazuela San Juanillo", "Mercado Morro","Rotonda Rotari", "Av. Marcelo Quiroga","Av. de las Americas","Parada Tarabuco", "Mercado San Antonio", "Sancho", "Barrio Bolivia"]
+      },
+    ];
+
+    /* ---------- A partir de aquí no necesitas cambiar nada ---------- */
+    const caja = document.getElementById("resultados");
+    const conteo = document.getElementById("conteo");
+    const vacio = document.getElementById("vacio");
+    const campo = document.getElementById("buscar");
+
+    const limpiar = t => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
+    function dibujar(lista) {
+      caja.textContent = "";
+      lista.forEach(l => {
+        const d = document.createElement("details");
+        d.className = "linea";
+
+        const s = document.createElement("summary");
+        const n = document.createElement("span");
+        n.className = "numero"; n.textContent = l.numero;
+        const txt = document.createElement("div");
+        const h = document.createElement("h2"); h.textContent = l.nombre;
+        const p = document.createElement("small");
+        p.textContent = l.paradas[0] + " a " + l.paradas[l.paradas.length - 1];
+        txt.append(h, p);
+        s.append(n, txt);
+
+        const ol = document.createElement("ol");
+        ol.className = "paradas";
+        l.paradas.forEach(x => { const li = document.createElement("li"); li.textContent = x; ol.append(li); });
+
+        d.append(s, ol);
+        caja.append(d);
+      });
+      vacio.hidden = lista.length > 0;
+      conteo.textContent = lista.length === LINEAS.length
+        ? LINEAS.length + " líneas disponibles"
+        : lista.length + " de " + LINEAS.length + " líneas";
+    }
+
+    campo.addEventListener("input", () => {
+      const q = limpiar(campo.value);
+      const filtradas = LINEAS.filter(l =>
+        limpiar(l.numero + " " + l.nombre + " " + l.paradas.join(" ")).includes(q)
+      );
+      dibujar(filtradas);
+    });
+
+    dibujar(LINEAS);
+  </script>
+</body>
+</html>

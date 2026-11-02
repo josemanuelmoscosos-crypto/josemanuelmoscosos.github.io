@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Parada Blanca | Rutas de micros de Sucre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <!-- Dibujo del micro (se reutiliza en la calle) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="micro" viewBox="0 0 120 56">
+      <rect x="2" y="4" width="116" height="38" rx="9" fill="currentColor"/>
+      <rect x="10" y="11" width="16" height="13" rx="2" fill="#EAF3F6"/>
+      <rect x="30" y="11" width="16" height="13" rx="2" fill="#EAF3F6"/>
+      <rect x="50" y="11" width="16" height="13" rx="2" fill="#EAF3F6"/>
+      <rect x="70" y="11" width="16" height="13" rx="2" fill="#EAF3F6"/>
+      <path d="M92 11h18a4 4 0 0 1 4 4v9H92z" fill="#EAF3F6"/>
+      <rect x="2" y="30" width="116" height="4" fill="#000" opacity=".18"/>
+      <circle cx="116" cy="34" r="2.5" fill="#FFE9A8"/>
+      <circle cx="28" cy="44" r="9" fill="#1B252C"/><circle cx="28" cy="44" r="3.5" fill="#9FB0B8"/>
+      <circle cx="92" cy="44" r="9" fill="#1B252C"/><circle cx="92" cy="44" r="3.5" fill="#9FB0B8"/>
+    </symbol>
+  </svg>
+
+  <header class="barra">
+    <a class="marca" href="index.html"><b>LPB</b> La Parada Blanca</a>
+    <nav>
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="rutas.html">Rutas</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="portada">
+      <!-- TU FOTO: guarda tu imagen en esta misma carpeta con el nombre foto.jpg
+           (o cambia el nombre en src="..."). -->
+      <div class="foto">
+        <img src="c:\Users\LaRecoleta\3D Objects\Pictures\logo.png" alt="Vista de la ciudad de Sucre"
+             onerror="this.style.display='none'; document.getElementById('aviso').hidden=false;">
+      </div>
+      
+      <div class="portada-texto">
+        <h1>Encuentra tu micro en la Ciudad Blanca</h1>
+        <p>Todas las rutas del Sindicato San Cristóbal reunidas en un solo lugar, para que sepas qué línea tomar antes de salir de casa.</p>
+        <a class="boton" href="rutas.html">Ver las rutas</a>
+      </div>
+
+      <div class="calle" aria-hidden="true">
+        <svg class="micro"><use href="#micro"/></svg>
+        <svg class="micro"><use href="#micro"/></svg>
+        <svg class="micro"><use href="#micro"/></svg>
+        <svg class="micro"><use href="#micro"/></svg>
+      </div>
+    </section>
+
+    <section class="que-es">
+      <h2>¿Qué es La Parada Blanca?</h2>
+      <p>Es una página web hecha para estudiantes, trabajadores, vecinos y turistas de Sucre que necesitan saber por dónde pasa cada micro.</p>
+      <ul class="pasos">
+        <li><strong>Busca tu línea</strong>Escribe el número o el nombre de un barrio.</li>
+        <li><strong>Mira el recorrido</strong>Revisa las paradas en el orden en que pasa el micro.</li>
+        <li><strong>Planifica tu viaje</strong>Llega a tu destino sin esperas ni preguntas a terceros.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="pie">La Parada Blanca. Sucre, Bolivia.</footer>
+</body>
+</html>
+
+
+
